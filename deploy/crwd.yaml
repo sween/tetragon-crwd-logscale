@@ -35,6 +35,8 @@ spec:
         volumeMounts:
         - name: varlog
           mountPath: /var/log/tetragon
+        - mountPath: /var/log/tetragon/
+          name: tetra-crwd-conf
       # it may be desirable to set a high priority class to ensure that a DaemonSet Pod
       # preempts running Pods
       # priorityClassName: important
@@ -43,3 +45,11 @@ spec:
       - name: varlog
         hostPath:
           path: /var/run/cilium/tetragon
+      - name: tetra-crwd-conf
+        configMap: 
+          name: tetra-crwd-conf
+          items:
+            - key: tetragon-crwd-logscale.py
+              path: tetragon-crwd-logscale.py
+
+

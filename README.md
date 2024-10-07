@@ -3,6 +3,12 @@
 A Daemonset to send Tetragon Events to Crowdstrike Falcon LogScale NG-SIEM
 
 
+```
+kubectl create configmap tetra-crwd-config --from-file tetragon-crwd-logscale.py -n kube-system
+
+```
+
+
 
 ### Build
 ```
