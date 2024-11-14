@@ -6,9 +6,9 @@ metadata:
   labels:
     k8s-app: tetragon-crwd-logscale
 spec:
-  #selector:
-  #  matchLabels:
-  #    app.kubernetes.io/name: tetragon
+  selector:
+    matchLabels:
+      name: tetragon-crwd-logscale
   template:
     metadata:
       labels:
