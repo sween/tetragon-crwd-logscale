@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      name: tetragon
+      app.kubernetes.io/name: tetragon
   template:
     metadata:
       labels:
