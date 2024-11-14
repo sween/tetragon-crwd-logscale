@@ -1,0 +1,8 @@
+apiVersion: v1
+description: 'A Solution to send Tetragon Events to Crowdstrike Falcon LogScale SIEM'
+name: tetragon-crwd-logscale
+version: 0.0.1
+appVersion: 0.0.1
+maintainers:
+  - name: Ron Sweeney
+    email: ron.sweeney@gmail.com

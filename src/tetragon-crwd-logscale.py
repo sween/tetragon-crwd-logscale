@@ -1,49 +1,51 @@
-#!/usr/bin/env python
-
-import json
-import time
-import os
 import sys
-import requests
+import time
+import json
+import os
 import socket
+import subprocess
 from datetime import datetime
 from humiolib.HumioClient import HumioIngestClient
 
-
-# Required for CRWD Data Source
-today = datetime.now()
-fqdn = socket.getfqdn()
-input_string = sys.stdin.read()
-input_json = json.loads(input_string)
-
-
-payload = [
-    {
-        "tags": {
-            "host": fqdn,
-            "source": "irislogd"
-        },
-            "events": [
-            {
-                "timestamp": today.isoformat(sep='T',timespec='auto') + "Z",
-                "attributes": input_json
-            }
-        ]
-    }
-]
-
-file1 = open('/tmp/log.log', 'w')
-
- 
-# Writing a string to file
-file1.write(input_string)
+def send_siem(line):
+    # Do something with the line
+    print(line.decode())
+    # Required for CRWD Data Source
+    today = datetime.now()
+    fqdn = socket.getfqdn()
+    input_json = json.loads(line.decode())
 
 
-client = HumioIngestClient(
-    base_url= "https://cloud.community.humio.com",
-    ingest_token= "6d8e981f-928c-4add-8acf-81c9a5dbb512" # os.environ["CS_LOGSCALE_APIKEY"]
-)
+    payload = [
+        {
+            "tags": {
+                "host": fqdn,
+                "source": "tetragon"
+            },
+                "events": [
+                {
+                    "timestamp": today.isoformat(sep='T',timespec='auto') + "Z",
+                    "attributes": input_json
+                }
+            ]
+        }
+    ]
 
-ingest_response = client.ingest_json_data(payload)
-print(ingest_response)
 
+    client = HumioIngestClient(
+        base_url= "https://cloud.community.humio.com",
+        ingest_token = os.environ["CS_LOGSCALE_APIKEY"])
+
+    ingest_response = client.ingest_json_data(payload)
+    print(ingest_response)
+
+    
+def tail_file(filename):
+    process = subprocess.Popen(["tail", "-f", filename], stdout=subprocess.PIPE)
+    while True:
+        line = process.stdout.readline()
+        if not line:
+            break
+        send_siem(line)
+  
+tail_file("/var/log/tetragon/tetragon.log")

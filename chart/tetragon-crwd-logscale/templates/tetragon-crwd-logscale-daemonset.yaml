@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: tetragon-crwd-logscale
+  namespace: kube-system
+  labels:
+    k8s-app: tetragon-crwd-logscale
+spec:
+  selector:
+    matchLabels:
+      name: app.kubernetes.io/name=tetragon
+  template:
+    metadata:
+      labels:
+        name: tetragon-crwd-logscale
+    spec:
+      containers:
+      - name: tetragon-crwd-logscale
+        image: sween/tetragon-crwd-logscale:latest
+        command: ["/usr/bin/python3"]
+        args: ["/tetragon-crwd/tetragon-crwd-logscale.py"]
+        env:
+        - name: CS_LOGSCALE_APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: cs-logscale-apikey
+              key: apikey
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log/tetragon
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/run/cilium/tetragon
