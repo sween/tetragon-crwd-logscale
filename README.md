@@ -122,6 +122,16 @@ kubectl apply -f https://raw.githubusercontent.com/sween/tetragon-crwd-logscale/
 
 ![alt text](assets/image-0.png)
 
+### Install This
+Install this [DaemonSet](https://sween.github.io/tetragon-crwd-logscale/)
+
+<img src="assets/image-8.png" width="250">
+
+
+```
+kubectl apply -f https://raw.githubusercontent.com/sween/tetragon-crwd-logscale/refs/heads/main/chart/tetragon-crwd-logscale/templates/tetragon-crwd-logscale-daemonset.yaml
+```
+
 ### Crowdstrike LogScale Community
 
 Getting Started was ridiculously straight forward and I had the account approved in a couple of days with the following disclaimer:
