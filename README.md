@@ -11,27 +11,32 @@ You have a Kubernetes Cluster protected with install [Tetragon](https://tetragon
 
 ![alt text](assets/image.png)
 
-Project Page: https://sween.github.io/tetragon-crwd-logscale/
+[Tetragon CRWD LogScale Project Page](https://sween.github.io/tetragon-crwd-logscale/)
 
 ## Quick Install
-The 1, 2, 3, 4 to get up and running.
+Up and running.
+
+- Cut LogScale API Key  
+- Install Daemonset  
+- Iterate Tetragon Events  
 
 ### API Key/Secret
-Create an api-key in the Crowdstrike console, assign a [parser]() to it, and load it up in a Secret for the Daemonset to utilize.  Parsers are necessary in production for speed and normalization, but for general inspection here, we will use a general parser.  Binding a parser to an endpoint is an important concept to understand.
+Create an api-key in the Crowdstrike console, assign a [parser](https://library.humio.com/data-analysis-1.70/parsers.html) to it, and load it up in a Secret for the Daemonset to utilize.  Parsers are necessary in production for speed and normalization, but for general inspection here, we will use a general parser.  Binding a parser to an endpoint is an important concept to understand.
 
 ![alt text](assets/image-5.png)
 
 
-Shhhhhhh.... load the api key up as a Secret.
+Shhhhhhh.... now load the api key up as a Secret.
 
 ```
 kubectl create secret generic cs-logscale-apikey -n kube-system     --from-literal=apikey="....-30c2-48a5-b986-....."
 ```
 
-### Install This
+### Install It
 Install this [DaemonSet](https://sween.github.io/tetragon-crwd-logscale/)
 
-![alt text](assets/image-8.png)
+<img src="assets/image-8.png" width="250">
+
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/sween/tetragon-crwd-logscale/refs/heads/main/chart/tetragon-crwd-logscale/templates/tetragon-crwd-logscale-daemonset.yaml
@@ -40,7 +45,7 @@ kubectl apply -f https://raw.githubusercontent.com/sween/tetragon-crwd-logscale/
 ![alt text](assets/image-1.png)
 
 ### Ensure Tracing Policies
-Of course, make sure Tetragon is loaded up with some Tracing Policies, there are four or so in the repo that get the point across.
+Of course, make sure Tetragon is loaded up with some Tracing Policies, there are four or so in the repo that get the point across if you want to use those.
 
 ![alt text](assets/image-0.png)
 
@@ -59,10 +64,7 @@ Give it awhile to draw you a picture of what the active workloads on the cluster
 
 Mission Accomplished, and today was a good Cilium/eBPF Day!  
 
-What a fantastic community these Isovalent peeps are.
-
 ![alt text](assets/image-7.png)
-
 
 
 
@@ -144,7 +146,7 @@ kubectl apply -f https://raw.githubusercontent.com/sween/basenube/refs/heads/mai
 ## About the Container
 If you want some info on the container running in the daemonset, it is for your inspection/availability out on dockerhub.
 
-Docker Image [Dockerfile]() is available for public review on [DockerHub]() for the curious, I also wanted to figure out the BOM for this guy, as I lazilly created it from Ubuntu, installed the [Humio Client (LogScale)]().
+Docker Image [Dockerfile](https://raw.githubusercontent.com/sween/tetragon-crwd-logscale/refs/heads/main/Dockerfile) is available for public review on [DockerHub](https://hub.docker.com/r/sween/tetragon-crwd-logscale) for the curious, and wondering the BOM for this guy, as I lazilly created it from Ubuntu, installed the [Humio Client (LogScale)](https://github.com/humio/python-humio) and called it a day.
 
 You can install the [CrowdStrike Operator](https://github.com/CrowdStrike/falcon-operator/blob/main/docs/deployment/generic/README.md) for Kubernetes and see what it says about your container security as well with a subscription.
 
