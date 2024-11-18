@@ -11,6 +11,7 @@ You have a Kubernetes Cluster protected with install [Tetragon](https://tetragon
 
 ![alt text](assets/image.png)
 
+Project Page: https://sween.github.io/tetragon-crwd-logscale/
 
 ## Quick Install
 The 1, 2, 3, 4 to get up and running.
@@ -28,7 +29,9 @@ kubectl create secret generic cs-logscale-apikey -n kube-system     --from-liter
 ```
 
 ### Install This
-Install this `DaemonSet`
+Install this [DaemonSet](https://sween.github.io/tetragon-crwd-logscale/)
+
+![alt text](assets/image-8.png)
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/sween/tetragon-crwd-logscale/refs/heads/main/chart/tetragon-crwd-logscale/templates/tetragon-crwd-logscale-daemonset.yaml
@@ -49,6 +52,8 @@ See if you have a new events in the Search Console, and get exploring!
 
 ### Build a Dashboard
 Now, put a Clown Suit on those events!  Your context menu in the search console is your cheat code, you can basically snag any field from anywhere, and use it as a timeseries value and it will generate a time series visualization.
+
+Give it awhile to draw you a picture of what the active workloads on the cluster are up to, and build a baseline.
 
 ![alt text](assets/image-3.png)
 
