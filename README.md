@@ -131,7 +131,7 @@ _Falcon LogScale Community is a free service providing you with up to 16 GB/day 
 Pretty generous and a good fit for this implementation, with the caveat all good things can come to an end I guess... be warned Kernel events are chatty, so 16GB may brush up against this limit.
 
 
-###
+### Apply Workload(s)
 Apply a Workload, my [FHIR® based/Star Wars](https://community.intersystems.com/post/ebpf-cilium-fhir%C2%AE-star-wars-story) version.
 
 ```
