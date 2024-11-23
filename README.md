@@ -60,7 +60,7 @@ Now, put a Clown Suit on those events!  Your context menu in the search console 
 
 Give it awhile to draw you a picture of what the active workloads on the cluster are up to, and build a baseline.
 
-![alt text](assets/image-3.png)
+![alt text](assets/image-9.png)
 
 Mission Accomplished, and today was a good Cilium/eBPF Day!  
 
@@ -150,7 +150,7 @@ kubectl apply -f https://raw.githubusercontent.com/sween/basenube/refs/heads/mai
 
 ### Build a Dashboard
 
-![alt text](assets/image-4.png)
+![alt text](assets/image-9.png)
 
 
 ## About the Container
